@@ -1,9 +1,31 @@
 package logger
 
-import "log"
+import (
+	"context"
+	"log"
+	"time"
+)
 
-func HandleError(message string, err error) {
+func Error(message string, err error) {
 	if err != nil {
 		log.Fatalf("%s: %v", message, err)
 	}
+}
+
+func Every(message string, interval time.Duration) context.CancelFunc {
+	ctx, cancel := context.WithCancel(context.Background())
+
+	go func() {
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			default:
+				log.Println(message)
+				time.Sleep(interval)
+			}
+		}
+	}()
+
+	return cancel
 }
