@@ -1,3 +1,3 @@
-module github.com/adamvixio/logger
+module github.com/adamavixio/logger
 
 go 1.17
