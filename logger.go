@@ -8,7 +8,13 @@ import (
 
 func Error(message string, err error) {
 	if err != nil {
-		log.Fatalf("%s: %v", message, err)
+		log.Fatalf("ERROR - %s: %v", message, err)
+	}
+}
+
+func Warning(message string, err error) {
+	if err != nil {
+		log.Printf("WARNING - %s: %v", message, err)
 	}
 }
 
