@@ -6,15 +6,17 @@ import (
 	"time"
 )
 
-func Info(message string, err error) {
-	if err != nil {
-		log.Printf("WARNING - %s: %v", message, err)
-	}
+func Trace(message string) {
+	log.Printf("TRACE: %s", message)
+}
+
+func Info(message string) {
+	log.Printf("INFO: %s", message)
 }
 
 func Warn(message string, err error) {
 	if err != nil {
-		log.Printf("WARNING - %s: %v", message, err)
+		log.Printf("WARNING: %s: %v", message, err)
 	}
 }
 
