@@ -6,15 +6,21 @@ import (
 	"time"
 )
 
-func Error(message string, err error) {
+func Info(message string, err error) {
 	if err != nil {
-		log.Fatalf("ERROR - %s: %v", message, err)
+		log.Printf("WARNING - %s: %v", message, err)
 	}
 }
 
-func Warning(message string, err error) {
+func Warn(message string, err error) {
 	if err != nil {
 		log.Printf("WARNING - %s: %v", message, err)
+	}
+}
+
+func Error(message string, err error) {
+	if err != nil {
+		log.Fatalf("ERROR - %s: %v", message, err)
 	}
 }
 
