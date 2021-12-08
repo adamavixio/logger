@@ -19,8 +19,6 @@ const (
 	red    = "\033[31m"
 )
 
-type testFlag struct{}
-
 //
 // Actions
 //
@@ -41,8 +39,10 @@ func Warn(message string, err error, opts ...interface{}) {
 }
 
 func Error(message string, err error, opts ...interface{}) {
-	formatted := formatMessage(message, err, opts...)
-	log.Fatal(red, formatted, reset)
+	if err != nil {
+		formatted := formatMessage(message, err, opts...)
+		log.Fatal(red, formatted, reset)
+	}
 }
 
 //
