@@ -62,7 +62,7 @@ func base(level string, message string) string {
 func timestamp() string {
 	date := time.Now().UTC()
 	return fmt.Sprintf(
-		"%d/%d/%d %d:%d:%d",
+		"%04d/%02d/%02d %02d:%02d:%02d",
 		date.Year(), date.Month(), date.Day(),
 		date.Hour(), date.Minute(), date.Second(),
 	)
