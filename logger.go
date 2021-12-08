@@ -25,7 +25,7 @@ const (
 )
 
 //
-// Actions
+// Exports
 //
 
 // Trace log messages are meant to track progress
