@@ -13,10 +13,15 @@ import (
 //
 
 const (
-	reset  = "\033[0m"
-	blue   = "\033[34m"
-	yellow = "\033[33m"
-	red    = "\033[31m"
+	DEFAULT = "\033[0m"
+	BLUE    = "\033[34m"
+	YELLOW  = "\033[33m"
+	RED     = "\033[31m"
+
+	TRACE = "Trace"
+	INFO  = "Info"
+	WARN  = "Warn"
+	ERROR = "Error"
 )
 
 //
@@ -24,24 +29,24 @@ const (
 //
 
 func Trace(message string, opts ...interface{}) {
-	formatted := formatMessage(message, nil, opts...)
-	log.Print(blue, formatted, reset)
+	formatted := formatMessage(TRACE, message, nil, opts...)
+	log.Print(BLUE, formatted, DEFAULT)
 }
 
 func Info(message string, opts ...interface{}) {
-	formatted := formatMessage(message, nil, opts...)
+	formatted := formatMessage(INFO, message, nil, opts...)
 	log.Print(formatted)
 }
 
 func Warn(message string, err error, opts ...interface{}) {
-	formatted := formatMessage(message, err, opts...)
-	log.Print(yellow, formatted, reset)
+	formatted := formatMessage(WARN, message, err, opts...)
+	log.Print(YELLOW, formatted, DEFAULT)
 }
 
 func Error(message string, err error, opts ...interface{}) {
 	if err != nil {
-		formatted := formatMessage(message, err, opts...)
-		log.Fatal(red, formatted, reset)
+		formatted := formatMessage(ERROR, message, err, opts...)
+		log.Fatal(RED, formatted, DEFAULT)
 	}
 }
 
@@ -63,10 +68,10 @@ func timestamp() string {
 	)
 }
 
-func formatMessage(message string, err error, opts ...interface{}) string {
+func formatMessage(level string, message string, err error, opts ...interface{}) string {
 	formatted := strings.Builder{}
 
-	formattedMessage := fmt.Sprintf(base("Error", message), opts...)
+	formattedMessage := fmt.Sprintf(base(level, message), opts...)
 	formatted.WriteString(formattedMessage)
 
 	if err != nil {
