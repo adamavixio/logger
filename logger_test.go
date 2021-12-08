@@ -20,17 +20,17 @@ func TestInfo(t *testing.T) {
 }
 
 func TestWarnWithoutErr(t *testing.T) {
-	Warn("%s", nil, "yellow")
+	Warn(nil, "%s", "yellow")
 }
 
 func TestWarnWithErr(t *testing.T) {
 	err := errors.New("error message")
-	Warn("%s", err, "yellow")
+	Warn(err, "%s", "yellow")
 }
 
 func TestWarnWithLongErr(t *testing.T) {
 	err := errors.New(randomSentence(20, 10))
-	Warn("%s", err, "yellow")
+	Warn(err, "%s", "yellow")
 }
 
 //

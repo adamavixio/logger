@@ -28,22 +28,40 @@ const (
 // Actions
 //
 
+// Trace log messages are meant to track progress
+// through a system or process. The opts are variables
+// that can be subsituted into the message using format.
 func Trace(message string, opts ...interface{}) {
 	formatted := formatMessage(tracePrefix, message, nil, opts...)
 	log.Print(blue, formatted, reset)
 }
 
+// Info log messages are meant to display information
+// or data that is unrelated to the progress of a system.
+// The opts are variables that can be subsituted into the
+// message using format.
 func Info(message string, opts ...interface{}) {
 	formatted := formatMessage(infoPrefix, message, nil, opts...)
 	log.Print(formatted)
 }
 
-func Warn(message string, err error, opts ...interface{}) {
-	formatted := formatMessage(warnPrefix, message, err, opts...)
-	log.Print(yellow, formatted, reset)
+// Warn log messages are meant to display information for an
+// error that does not require the program to exit. If the
+// error is nil, there will be no output. The opts are variables
+// that can be subsituted into the message using format.
+func Warn(err error, message string, opts ...interface{}) {
+	if err != nil {
+		formatted := formatMessage(warnPrefix, message, err, opts...)
+		log.Print(yellow, formatted, reset)
+	}
 }
 
-func Error(message string, err error, opts ...interface{}) {
+// Error log messages are meant to display information for an
+// error that does require the program to exit. If the
+// error is nil, there will be no output and the program
+// will not exit. The opts are variables that can be subsituted
+// into the message using format.
+func Error(err error, message string, opts ...interface{}) {
 	if err != nil {
 		formatted := formatMessage(errorPrefix, message, err, opts...)
 		log.Fatal(red, formatted, reset)
