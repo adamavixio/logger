@@ -19,46 +19,30 @@ const (
 	red    = "\033[31m"
 )
 
+type testFlag struct{}
+
 //
 // Actions
 //
 
 func Trace(message string, opts ...interface{}) {
-	formatted := fmt.Sprintf(base("Trace", message), opts...)
+	formatted := formatMessage(message, nil, opts...)
 	log.Print(blue, formatted, reset)
 }
 
 func Info(message string, opts ...interface{}) {
-	formatted := fmt.Sprintf(base("Info ", message), opts...)
+	formatted := formatMessage(message, nil, opts...)
 	log.Print(formatted)
 }
 
 func Warn(message string, err error, opts ...interface{}) {
-	formatted := strings.Builder{}
-
-	formattedMessage := fmt.Sprintf(base("Error", message), opts...)
-	formatted.WriteString(formattedMessage)
-
-	if err != nil {
-		errorMessage := formatError(err)
-		formatted.WriteString(errorMessage.Error())
-	}
-
-	log.Print(yellow, formatted.String(), reset)
+	formatted := formatMessage(message, err, opts...)
+	log.Print(yellow, formatted, reset)
 }
 
 func Error(message string, err error, opts ...interface{}) {
-	formatted := strings.Builder{}
-
-	formattedMessage := fmt.Sprintf(base("Error", message), opts...)
-	formatted.WriteString(formattedMessage)
-
-	if err != nil {
-		errorMessage := formatError(err)
-		formatted.WriteString(errorMessage.Error())
-	}
-
-	log.Panic(red, formatted.String(), reset)
+	formatted := formatMessage(message, err, opts...)
+	log.Fatal(red, formatted, reset)
 }
 
 //
@@ -77,6 +61,20 @@ func timestamp() string {
 		date.Year(), date.Month(), date.Day(),
 		date.Hour(), date.Minute(), date.Second(),
 	)
+}
+
+func formatMessage(message string, err error, opts ...interface{}) string {
+	formatted := strings.Builder{}
+
+	formattedMessage := fmt.Sprintf(base("Error", message), opts...)
+	formatted.WriteString(formattedMessage)
+
+	if err != nil {
+		errorMessage := formatError(err)
+		formatted.WriteString(errorMessage.Error())
+	}
+
+	return formatted.String()
 }
 
 func formatError(err error) error {

@@ -33,33 +33,39 @@ func TestWarnWithLongErr(t *testing.T) {
 	Warn("%s", err, "yellow")
 }
 
-func TestErrorWithoutErr(t *testing.T) {
-	defer mockRecover()
+//
+// Error
+// In order to test, changed the error method to panic
+// and uncomment out the code below
+//
 
-	Error("%s", nil, "red")
-}
+// func mockRecover() {
+// 	recover()
+// }
 
-func TestErrorWithErr(t *testing.T) {
-	defer mockRecover()
+// func TestErrorWithoutErr(t *testing.T) {
+// 	defer mockRecover()
 
-	err := errors.New("error message")
-	Error("%s", err, "red")
-}
+// 	Error("%s", nil, "red", testFlag{})
+// }
 
-func TestErrWithLongErr(t *testing.T) {
-	defer mockRecover()
+// func TestErrorWithErr(t *testing.T) {
+// 	defer mockRecover()
 
-	err := errors.New(randomSentence(20, 10))
-	Error("%s", err, "red")
-}
+// 	err := errors.New("error message")
+// 	Error("%s", err, "red", testFlag{})
+// }
+
+// func TestErrWithLongErr(t *testing.T) {
+// 	defer mockRecover()
+
+// 	err := errors.New(randomSentence(20, 10))
+// 	Error("%s", err, "red", testFlag{})
+// }
 
 //
 // Tools
 //
-
-func mockRecover() {
-	recover()
-}
 
 func randomLetter() byte {
 	letters := "abcdefghijklmnopqrstuvwxyz"
