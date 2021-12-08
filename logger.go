@@ -13,15 +13,15 @@ import (
 //
 
 const (
-	DEFAULT = "\033[0m"
-	BLUE    = "\033[34m"
-	YELLOW  = "\033[33m"
-	RED     = "\033[31m"
+	reset  = "\033[0m"
+	blue   = "\033[34m"
+	yellow = "\033[33m"
+	red    = "\033[31m"
 
-	TRACE = "Trace"
-	INFO  = "Info "
-	WARN  = "Warn "
-	ERROR = "Error"
+	tracePrefix = "Trace"
+	infoPrefix  = "Info "
+	warnPrefix  = "Warn "
+	errorPrefix = "Error"
 )
 
 //
@@ -29,24 +29,24 @@ const (
 //
 
 func Trace(message string, opts ...interface{}) {
-	formatted := formatMessage(TRACE, message, nil, opts...)
-	log.Print(BLUE, formatted, DEFAULT)
+	formatted := formatMessage(tracePrefix, message, nil, opts...)
+	log.Print(blue, formatted, reset)
 }
 
 func Info(message string, opts ...interface{}) {
-	formatted := formatMessage(INFO, message, nil, opts...)
+	formatted := formatMessage(infoPrefix, message, nil, opts...)
 	log.Print(formatted)
 }
 
 func Warn(message string, err error, opts ...interface{}) {
-	formatted := formatMessage(WARN, message, err, opts...)
-	log.Print(YELLOW, formatted, DEFAULT)
+	formatted := formatMessage(warnPrefix, message, err, opts...)
+	log.Print(yellow, formatted, reset)
 }
 
 func Error(message string, err error, opts ...interface{}) {
 	if err != nil {
-		formatted := formatMessage(ERROR, message, err, opts...)
-		log.Fatal(RED, formatted, DEFAULT)
+		formatted := formatMessage(errorPrefix, message, err, opts...)
+		log.Fatal(red, formatted, reset)
 	}
 }
 
