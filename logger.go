@@ -19,8 +19,8 @@ const (
 	RED     = "\033[31m"
 
 	TRACE = "Trace"
-	INFO  = "Info"
-	WARN  = "Warn"
+	INFO  = "Info "
+	WARN  = "Warn "
 	ERROR = "Error"
 )
 
