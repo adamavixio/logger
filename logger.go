@@ -19,8 +19,8 @@ const (
 	red    = "\033[31m"
 
 	tracePrefix = "Trace"
-	infoPrefix  = "Info "
-	warnPrefix  = "Warn "
+	infoPrefix  = "Info"
+	warnPrefix  = "Warn"
 	errorPrefix = "Error"
 )
 
