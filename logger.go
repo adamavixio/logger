@@ -57,11 +57,22 @@ func Warn(err error, message string, opts ...interface{}) {
 }
 
 // Error log messages are meant to display information for an
+// error that does not require the program to exit. If the
+// error is nil, there will be no output. The opts are variables
+// that can be subsituted into the message using format.
+func Error(err error, message string, opts ...interface{}) {
+	if err != nil {
+		formatted := formatMessage(errorPrefix, message, err, opts...)
+		log.Print(red, formatted, reset)
+	}
+}
+
+// Fatal log messages are meant to display information for an
 // error that does require the program to exit. If the
 // error is nil, there will be no output and the program
 // will not exit. The opts are variables that can be subsituted
 // into the message using format.
-func Error(err error, message string, opts ...interface{}) {
+func Fatal(err error, message string, opts ...interface{}) {
 	if err != nil {
 		formatted := formatMessage(errorPrefix, message, err, opts...)
 		log.Fatal(red, formatted, reset)
