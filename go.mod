@@ -1,3 +1,3 @@
-module adamavixio/tools
+module adamavixio
 
 go 1.19
