@@ -1,3 +1,3 @@
-module github.com/adamavixio/logger
+module adamavixio/tools
 
-go 1.17
+go 1.19
