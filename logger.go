@@ -50,10 +50,8 @@ func Info(message string, opts ...interface{}) {
 // error is nil, there will be no output. The opts are variables
 // that can be subsituted into the message using format.
 func Warn(err error, message string, opts ...interface{}) {
-	if err != nil {
-		formatted := formatMessage(warnPrefix, message, err, opts...)
-		log.Print(yellow, formatted, reset)
-	}
+	formatted := formatMessage(warnPrefix, message, err, opts...)
+	log.Print(yellow, formatted, reset)
 }
 
 // Error log messages are meant to display information for an
@@ -61,10 +59,8 @@ func Warn(err error, message string, opts ...interface{}) {
 // error is nil, there will be no output. The opts are variables
 // that can be subsituted into the message using format.
 func Error(err error, message string, opts ...interface{}) {
-	if err != nil {
-		formatted := formatMessage(errorPrefix, message, err, opts...)
-		log.Print(red, formatted, reset)
-	}
+	formatted := formatMessage(errorPrefix, message, err, opts...)
+	log.Print(red, formatted, reset)
 }
 
 // Fatal log messages are meant to display information for an
@@ -73,10 +69,8 @@ func Error(err error, message string, opts ...interface{}) {
 // will not exit. The opts are variables that can be subsituted
 // into the message using format.
 func Fatal(err error, message string, opts ...interface{}) {
-	if err != nil {
-		formatted := formatMessage(errorPrefix, message, err, opts...)
-		log.Fatal(red, formatted, reset)
-	}
+	formatted := formatMessage(errorPrefix, message, err, opts...)
+	log.Fatal(red, formatted, reset)
 }
 
 //
